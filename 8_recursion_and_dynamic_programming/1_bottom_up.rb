@@ -13,9 +13,9 @@ def count_ways(n)
   c
 end
 
-p count_ways(0) == 1
-p count_ways(1) == 1
-p count_ways(2) == 2
-p count_ways(3) == 4
-p count_ways(4) == 7
-p count_ways(5) == 13
+p count_ways(0) # 1
+p count_ways(1) # 1
+p count_ways(2) # 2
+p count_ways(3) # 4
+p count_ways(4) # 7
+p count_ways(5) # 13

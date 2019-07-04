@@ -7,9 +7,9 @@ def count_ways(n, memo)
 end
 
 memo = [0, 1]
-p count_ways(0, memo) == 1
-p count_ways(1, memo) == 1
-p count_ways(2, memo) == 2
-p count_ways(3, memo) == 4
-p count_ways(4, memo) == 7
-p count_ways(5, memo) == 13
+p count_ways(0, memo) # 1
+p count_ways(1, memo) # 1
+p count_ways(2, memo) # 2
+p count_ways(3, memo) # 4
+p count_ways(4, memo) # 7
+p count_ways(5, memo) # 13
