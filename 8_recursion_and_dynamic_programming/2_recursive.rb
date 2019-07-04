@@ -13,20 +13,18 @@ class RobotGrid
   end
 
   def get_path
-    return @path if can_backtrack?(@num_rows - 1, @num_cols - 1) 
-    'No path exists'
+    backtrack(@num_rows - 1, @num_cols - 1) 
+    @path
   end
 
-  def can_backtrack?(row, col)
-    return false if row < 0 || col < 0
+  def backtrack(row, col)
+    return if row < 0 || col < 0
 
     if (row.zero? && col.zero?) || \
-        can_backtrack?(row, col - 1) || \
-        can_backtrack?(row - 1, col) 
+        backtrack(row, col - 1) || \
+        backtrack(row - 1, col) 
       @path.push([row, col])
-      return true 
     end
-    false
   end
 
   private
@@ -55,4 +53,7 @@ p RobotGrid.new(1, 2).get_path # [[0, 0], [0, 1]]
 p RobotGrid.new(2, 2).get_path # [[0, 0], [1, 0], [1, 1]]
 p RobotGrid.new(2, 3).get_path # [[0, 0], [1, 0], [1, 1], [1, 2]]
 p RobotGrid.new(3, 3).get_path # [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2]]
-p RobotGrid.new(3, 4).get_path # [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2], [2, 3]]
+p RobotGrid.new(3, 4).get_path
+ # [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2], [2, 3]]
+p RobotGrid.new(4, 4).get_path
+# [[0, 0], [1, 0], [2, 0], [3, 0], [3, 1], [3, 2], [3, 3]]
