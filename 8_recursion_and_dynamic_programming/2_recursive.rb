@@ -1,5 +1,5 @@
-class GridError < StandardError 
-  def initialize(msg='num_rows and num_cols must be integers greater than 0')
+class GridError < StandardError
+  def initialize(msg = 'num_rows and num_cols must be integers greater than 0')
     super
   end
 end
@@ -12,8 +12,8 @@ class RobotGrid
     @path = []
   end
 
-  def get_path
-    backtrack(@num_rows - 1, @num_cols - 1) 
+  def path
+    backtrack(@num_rows - 1, @num_cols - 1)
     @path
   end
 
@@ -21,8 +21,8 @@ class RobotGrid
     return if row < 0 || col < 0
 
     if (row.zero? && col.zero?) || \
-        backtrack(row, col - 1) || \
-        backtrack(row - 1, col) 
+       backtrack(row, col - 1) || \
+       backtrack(row - 1, col)
       @path.push([row, col])
     end
   end
@@ -48,12 +48,12 @@ rescue GridError
   p true
 end
 
-p RobotGrid.new(1, 1).get_path # [[0, 0]]
-p RobotGrid.new(1, 2).get_path # [[0, 0], [0, 1]]
-p RobotGrid.new(2, 2).get_path # [[0, 0], [1, 0], [1, 1]]
-p RobotGrid.new(2, 3).get_path # [[0, 0], [1, 0], [1, 1], [1, 2]]
-p RobotGrid.new(3, 3).get_path # [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2]]
-p RobotGrid.new(3, 4).get_path
- # [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2], [2, 3]]
-p RobotGrid.new(4, 4).get_path
+p RobotGrid.new(1, 1).path # [[0, 0]]
+p RobotGrid.new(1, 2).path # [[0, 0], [0, 1]]
+p RobotGrid.new(2, 2).path # [[0, 0], [1, 0], [1, 1]]
+p RobotGrid.new(2, 3).path # [[0, 0], [1, 0], [1, 1], [1, 2]]
+p RobotGrid.new(3, 3).path # [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2]]
+p RobotGrid.new(3, 4).path
+# [[0, 0], [1, 0], [2, 0], [2, 1], [2, 2], [2, 3]]
+p RobotGrid.new(4, 4).path
 # [[0, 0], [1, 0], [2, 0], [3, 0], [3, 1], [3, 2], [3, 3]]
