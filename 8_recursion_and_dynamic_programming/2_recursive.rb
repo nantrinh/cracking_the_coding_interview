@@ -53,12 +53,12 @@ class RobotGrid
     raise GridError unless valid_rows_and_columns?(num_rows, num_cols)
     @num_rows = num_rows
     @num_cols = num_cols
-    @path = []
     raise ObstaclesError unless obstacles.nil? || valid_obstacles?(obstacles)
     create_maze(num_rows, num_cols, obstacles)
   end
 
   def path
+    @path = []
     return @path if backtrack?(@num_rows - 1, @num_cols - 1)
     []
   end
