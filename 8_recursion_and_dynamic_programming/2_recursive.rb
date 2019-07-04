@@ -1,34 +1,34 @@
-def test_invalid_args()
+def test_invalid_args
   begin
     RobotGrid.new(-1, -1)
   rescue GridError
     p true
   end
-  
+
   begin
     RobotGrid.new(1, 1.5)
   rescue GridError
     p true
   end
-  
+
   begin
     RobotGrid.new(1, 1, [[1, 1]])
   rescue ObstaclesError
     p true
   end
-  
+
   begin
-    RobotGrid.new(4, 4, [[0, 1], ['a', 'b']])
+    RobotGrid.new(4, 4, [[0, 1], %w(a b)])
   rescue ObstaclesError
     p true
   end
-  
+
   begin
     RobotGrid.new(4, 4, [[5, 1]])
-  rescue ObstaclesError 
+  rescue ObstaclesError
     p true
   end
-  
+
   begin
     RobotGrid.new(4, 4, ['hello'])
   rescue ObstaclesError
@@ -49,7 +49,7 @@ class ObstaclesError < StandardError
 end
 
 class RobotGrid
-  def initialize(num_rows, num_cols, obstacles=nil)
+  def initialize(num_rows, num_cols, obstacles = nil)
     raise GridError unless valid_rows_and_columns?(num_rows, num_cols)
     @num_rows = num_rows
     @num_cols = num_cols
@@ -60,11 +60,11 @@ class RobotGrid
 
   def path
     return @path if backtrack?(@num_rows - 1, @num_cols - 1)
-    [] 
+    []
   end
 
   def backtrack?(row, col)
-    return false if row < 0 || col < 0 || @maze[row][col].nil? 
+    return false if row < 0 || col < 0 || @maze[row][col].nil?
 
     if (row.zero? && col.zero?) || \
        backtrack?(row, col - 1) || \
@@ -80,14 +80,13 @@ class RobotGrid
 
   def valid_rows_and_columns?(num_rows, num_cols)
     num_rows.class == Integer && num_cols.class == Integer && \
-    num_rows > 0 && num_cols > 0
+      num_rows > 0 && num_cols > 0
   end
 
   def valid_obstacles?(obstacles)
-
     obstacles.class == Array && \
       (obstacles.empty? || \
-      obstacles.all? {|o| valid_row_index?(o[0]) && valid_col_index?(o[1])})
+      obstacles.all? { |o| valid_row_index?(o[0]) && valid_col_index?(o[1]) })
   end
 
   def valid_row_index?(index)
@@ -99,9 +98,9 @@ class RobotGrid
   end
 
   def create_maze(num_rows, num_cols, obstacles)
-    @maze = Array.new(num_rows) {Array.new(num_cols, 1)}
+    @maze = Array.new(num_rows) { Array.new(num_cols, 1) }
     return if obstacles.nil?
-    obstacles.each.each {|r, c| @maze[r][c] = nil} 
+    obstacles.each.each { |r, c| @maze[r][c] = nil }
   end
 end
 
